@@ -462,16 +462,19 @@ public class OwlDataHandler {
                     if (hasOpeningParenthesis) {
                         String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, openingParenthesis));
                         textToReplace = prefix + textToReplace;
+                        LOG.debug("text to replace: {}, for key: {}", textToReplace, key);
                     }
                     if (hasClosingParenthesis) {
                         String postfix = String.join("", Collections.nCopies(countClosingParenthesis, closingParenthesis));
                         textToReplace = textToReplace + postfix;
+                        LOG.debug("text to replace: {}, for key: {}", textToReplace, key);
                     }
                     splited[i] = textToReplace;
+                    LOG.debug("splited [{}]: {}", i, splited[i]);
 
                     String eIri = next.getIRI().toString();
                     if (cfg.isUriIri(eIri)) {
-                        parseToIri(eIri, opv, key, splited, i, key);
+                        parseToIri(eIri, opv, key, splited, i, splited[i]);
                         break;
                     } else {
                         parseUrl(eIri, splited, i);
